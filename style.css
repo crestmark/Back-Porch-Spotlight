@@ -1,18 +1,16 @@
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   background: #fefcf9;
   margin: 0;
   padding: 0;
 }
-
 header {
   background: #362e2d;
   color: white;
   padding: 40px 20px;
   text-align: center;
 }
-
 .vote-global {
   display: inline-block;
   margin-top: 20px;
@@ -23,37 +21,21 @@ header {
   text-decoration: none;
   border-radius: 5px;
 }
-
-.vote-global:hover {
-  background: #c9651b;
-}
-
 .bracket {
   padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.round {
-  width: 100%;
-  max-width: 800px;
-}
-
-.round h2 {
-  color: #333;
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 20px;
-}
-
 .matchup {
   border: 1px solid #ccc;
   padding: 16px;
   border-radius: 8px;
   margin-bottom: 20px;
   background: #fff;
+  width: 100%;
+  max-width: 600px;
 }
-
 .contestant {
   padding: 10px;
   font-size: 18px;
@@ -63,7 +45,6 @@ header {
   border-radius: 5px;
   text-align: center;
 }
-
 .vote-button {
   display: block;
   margin-top: 10px;
@@ -75,7 +56,16 @@ header {
   text-decoration: none;
   font-weight: bold;
 }
-
-.vote-button:hover {
-  background: #006f9c;
+.leaderboard {
+  text-align: center;
+  margin-top: 30px;
+}
+.leaderboard ul {
+  list-style: none;
+  padding: 0;
+}
+.leaderboard li {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 5px 0;
 }
