@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         card.appendChild(p);
 
         const voteBtn = document.createElement("a");
-        voteBtn.href = `https://form.jotform.com/251406526850051?performer=${encodeURIComponent(fullName)}`;
+        voteBtn.href = `https://form.jotform.com/251406526850051?Performer=${encodeURIComponent(fullName)}`;
         voteBtn.className = "vote-button";
         voteBtn.target = "_blank";
         voteBtn.textContent = "Vote Now";
