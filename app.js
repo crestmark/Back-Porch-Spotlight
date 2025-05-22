@@ -1,6 +1,7 @@
 let performers = [];
 const rounds = 6;
 
+// Fetch performer names from the master log Google Sheet (column: Performer)
 function fetchPerformersFromSheet() {
   const url = 'https://opensheet.elk.sh/1-la1e-tNf3IzDYkMznsog4ImyLedx4XKEDhuaYI8YaE/Master%20Log';
 
@@ -8,26 +9,28 @@ function fetchPerformersFromSheet() {
     .then(res => res.json())
     .then(data => {
       performers = data
-        .map(row => row["Performer"])  // <- Use the exact column label
-        .filter(name => !!name);       // Remove empty entries
+        .map(row => row["Performer"])
+        .filter(name => !!name);
+    })
+    .catch(err => {
+      console.error("Failed to load performers", err);
     });
 }
 
-const performers = Array.from({ length: 64 }, (_, i) => `Performer ${i + 1}`);
-const rounds = 6;
-
+// Generate the full mirrored bracket
 function generateBracket() {
   const left = document.getElementById("left-bracket");
   const right = document.getElementById("right-bracket");
 
-  const half = performers.length / 2;
+  const half = Math.floor(performers.length / 2);
   const leftPerformers = performers.slice(0, half);
-  const rightPerformers = performers.slice(half);
+  const rightPerformers = performers.slice(half, 64); // Limit to 64 total
 
   createSideBracket(left, leftPerformers, true);
   createSideBracket(right, rightPerformers, false);
 }
 
+// Create bracket columns for left or right side
 function createSideBracket(container, performerList, isLeft) {
   for (let round = 0; round < rounds; round++) {
     const column = document.createElement("div");
@@ -51,8 +54,9 @@ function createSideBracket(container, performerList, isLeft) {
   }
 }
 
+// Fetch and render leaderboard from vote responses Google Sheet
 function fetchLeaderboard() {
-  const sheetURL = 'https://opensheet.elk.sh/1-TFe1-8qJNbvmhlajS3hGZ8nZfI6jIU_yAZJMvEhdiQ/Form Responses 1';
+  const sheetURL = 'https://opensheet.elk.sh/1-TFe1-8qJNbvmhlajS3hGZ8nZfI6jIU_yAZJMvEhdiQ/Form%20Responses%201';
   fetch(sheetURL)
     .then(res => res.json())
     .then(data => {
@@ -68,7 +72,7 @@ function fetchLeaderboard() {
       });
 
       const sorted = Object.entries(tally)
-        .sort(([, aVotes], [, bVotes]) => bVotes - aVotes);
+        .sort(([, a], [, b]) => b - a);
 
       sorted.forEach(([name, votes]) => {
         const li = document.createElement('li');
@@ -81,7 +85,10 @@ function fetchLeaderboard() {
     });
 }
 
+// Initialize everything once the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  generateBracket();
-  fetchLeaderboard();
+  fetchPerformersFromSheet().then(() => {
+    generateBracket();
+    fetchLeaderboard();
+  });
 });
