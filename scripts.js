@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         card.className = "card";
 
         const img = document.createElement("img");
-        img.src = photo || "https://via.placeholder.com/300x300?text=No+Image";
+        img.src = photo || "default-image.png";
         card.appendChild(img);
 
         const h3 = document.createElement("h3");
