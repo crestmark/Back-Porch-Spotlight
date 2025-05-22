@@ -1,1 +1,0 @@
-console.log('Vote + Performer logic will be rebuilt here.');
