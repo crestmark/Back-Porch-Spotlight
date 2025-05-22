@@ -1,3 +1,18 @@
+let performers = [];
+const rounds = 6;
+
+function fetchPerformersFromSheet() {
+  const url = 'https://opensheet.elk.sh/1-la1e-tNf3IzDYkMznsog4ImyLedx4XKEDhuaYI8YaE/Master%20Log';
+
+  return fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      performers = data
+        .map(row => row["Performer"])  // <- Use the exact column label
+        .filter(name => !!name);       // Remove empty entries
+    });
+}
+
 const performers = Array.from({ length: 64 }, (_, i) => `Performer ${i + 1}`);
 const rounds = 6;
 
